@@ -5,11 +5,11 @@ from classes.views.course import *
 from classes.views.lesson import *
 
 urlpatterns = [
-    path('', LessonListView.as_view()),
-    path('<int:pk>/', LessonDetailView.as_view()),
-    path('<int:pk>/update/', LessonUpdateView.as_view()),
-    path('create/', LessonCreateView.as_view()),
-    path('<int:pk>/delete/', LessonDeleteView.as_view()),
+    path('lesson/', LessonListView.as_view()),
+    path('lesson/<int:pk>/', LessonDetailView.as_view()),
+    path('lesson/<int:pk>/update/', LessonUpdateView.as_view()),
+    path('lesson/create/', LessonCreateView.as_view()),
+    path('lesson/<int:pk>/delete/', LessonDeleteView.as_view()),
 ]
 
 router = routers.SimpleRouter()
