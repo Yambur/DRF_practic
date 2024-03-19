@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.generics import RetrieveAPIView, DestroyAPIView, ListAPIView, UpdateAPIView, CreateAPIView
 
@@ -13,6 +14,8 @@ class LessonDetailView(generics.RetrieveAPIView):
 class LessonListView(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
+    #filter_backends = [DjangoFilterBackend]
+    #filterset_fields = ('category', 'in_stock')
 
 
 class LessonCreateView(generics.CreateAPIView):
