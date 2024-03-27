@@ -1,16 +1,18 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from classes.models import Course
 from classes.serializers.course import CourseSerializers
+from users.permissions import IsModerator, IsOwner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-    default_serializer = CourseSerializer
+    default_serializer = CourseSerializers
     queryset = Course.objects.all()
     permission_classes = [IsAuthenticated]
     serializers_choice = {
-        'retrieve': CourseSerializer,
+        'retrieve': CourseSerializers,
     }
 
     def get_serializer_class(self):
