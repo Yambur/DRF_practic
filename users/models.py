@@ -6,6 +6,10 @@ from classes.models import Course, Lesson
 NULLABLE = {'blank': True, 'null': True}
 
 
+class UserRoles(models.TextChoices):
+    MEMBER = 'member'
+    MODERATOR = 'moderator'
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Почта')
