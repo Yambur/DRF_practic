@@ -14,8 +14,8 @@ class LessonDetailView(generics.RetrieveAPIView):
 class LessonListView(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
-    #filter_backends = [DjangoFilterBackend]
-    #filterset_fields = ('category', 'in_stock')
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('category', 'in_stock')
 
 
 class LessonCreateView(generics.CreateAPIView):
