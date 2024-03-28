@@ -1,8 +1,8 @@
 from django.urls import path
 from rest_framework import routers
 
-from classes.views.course import *
-from classes.views.lesson import *
+from classes.views.course import CourseViewSet
+from classes.views.lesson import LessonListView, LessonDetailView, LessonUpdateView, LessonCreateView, LessonDeleteView
 
 urlpatterns = [
     path('lesson/', LessonListView.as_view()),
