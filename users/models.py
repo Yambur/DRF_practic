@@ -10,6 +10,7 @@ class UserRoles(models.TextChoices):
     MEMBER = 'member'
     MODERATOR = 'moderator'
 
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Почта')
@@ -22,7 +23,6 @@ class User(AbstractUser):
 
 
 class Payment(models.Model):
-
     PAYMENT_METHOD_CHOICES = [
         ('CASH', "Наличные"),
         ('BANK', "Перевод")
@@ -36,8 +36,7 @@ class Payment(models.Model):
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, verbose_name="Метод оплаты",
                                       **NULLABLE)
 
-
-class Meta:
-    verbose_name = "Платеж"
-    verbose_name_plural = "Платежи"
-    ordering = ('-payment_method',)
+    class Meta:
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"
+        ordering = ('-payment_method',)
