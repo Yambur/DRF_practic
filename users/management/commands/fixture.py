@@ -10,12 +10,12 @@ class Command(BaseCommand):
         courses = Course.objects.all()
         lessons = Lesson.objects.all()
 
-        payment_list = [
-            {"user": users[0], "course": courses[0], "amount": "150000", "payment_method": "перевод"},
-            {"user": users[0], "lesson": lessons[1], "amount": "10000", "payment_method": "перевод"},
-        ]
+        payment_list = []
+        if users.exists():
+            user = users.first()
+            for course in courses:
+                payment_list.append(Payment(user=user, course=course, amount="150000", payment_method="перевод"))
+            for lesson in lessons[:2]:
+                payment_list.append(Payment(user=user, lesson=lesson, amount="10000", payment_method="перевод"))
 
-        payments_for_create = []
-        for payment in payment_list:
-            payments_for_create.append(Payment(**payment))
-        Payment.objects.bulk_create(payments_for_create)
+        Payment.objects.bulk_create(payment_list)

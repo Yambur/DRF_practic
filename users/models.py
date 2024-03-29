@@ -10,19 +10,20 @@ class UserRoles(models.TextChoices):
     MEMBER = 'member'
     MODERATOR = 'moderator'
 
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='Почта')
     phone = models.CharField(max_length=35, verbose_name='Телефон', **NULLABLE)
     city = models.CharField(max_length=50, verbose_name="Город", **NULLABLE)
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватар', **NULLABLE)
+    role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.MEMBER)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
 
 class Payment(models.Model):
-
     PAYMENT_METHOD_CHOICES = [
         ('CASH', "Наличные"),
         ('BANK', "Перевод")
@@ -36,8 +37,7 @@ class Payment(models.Model):
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, verbose_name="Метод оплаты",
                                       **NULLABLE)
 
-
-class Meta:
-    verbose_name = "Платеж"
-    verbose_name_plural = "Платежи"
-    ordering = ('-payment_method',)
+    class Meta:
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"
+        ordering = ('-payment_method',)
