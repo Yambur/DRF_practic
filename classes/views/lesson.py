@@ -18,7 +18,6 @@ class LessonListView(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ('category', 'in_stock')
     permission_classes = [IsAuthenticated]
 
 

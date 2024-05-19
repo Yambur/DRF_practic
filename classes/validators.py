@@ -1,6 +1,15 @@
 from rest_framework.serializers import ValidationError
 
 
-def url_validator(url):
-    if url and 'youtube.com' not in url:
-        raise ValidationError('Недопустимая ссылка')
+class LinkValidator:
+    def __init__(self, field):
+        self.field = field
+
+    def __call__(self, link):
+        youtube = 'https://youtube.com/'
+
+        if link.get('link_video'):
+            if youtube not in link.get('link_video'):
+                raise ValidationError('Не правильная сылка')
+        else:
+            return None
